@@ -1,9 +1,14 @@
 import { createBrowserRouter } from "react-router-dom";
-import NotFound from "../pages/NotFound";
-import Home from "../pages/Home";
-import AppLayout from "../layout/AppLayout";
-import Login from "../pages/Login";
-import Register from "../pages/Register";
+import NotFound from "../Pages/NotFound";
+import Home from "../Pages/Home";
+import AppLayout from "../Layout/AppLayout";
+import Login from "../Pages/Login";
+import Register from "../Pages/Register";
+import AllBook from "../Pages/AllBook";
+import AddBook from "../Pages/AddBook";
+import EditBook from "../Pages/EditBook";
+import BookDetail from "../Pages/BookDetail";
+import WishList from "../Pages/WishList";
 
 const router = createBrowserRouter([
     {
@@ -14,6 +19,26 @@ const router = createBrowserRouter([
             {
                 path: '/',
                 element: <Home/>
+            },
+            {
+                path: '/allBooks',
+                element: <AllBook/>
+            },
+            {
+                path: '/addBook',
+                element: <AddBook/>
+            },
+            {
+                path: '/editBook/:id',
+                element: <EditBook/>
+            },
+            {
+                path: '/bookDetail/:id',
+                element: <BookDetail/>
+            },
+            {
+                path: '/wishlist',
+                element: <WishList/>
             },
             {
                 path: '/login',
