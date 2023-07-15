@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { AiOutlineClose } from "react-icons/ai";
 import { FaShoppingCart } from "react-icons/fa";
+import { FaBook } from "react-icons/fa6";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -16,9 +17,12 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex flex-auto">
-            <h1 className="ml-6 text-white px-3 py-2 justify-end rounded-md text-lg md:text-xl font-medium">
-              Bookshelf App
+            <div className="flex text-white hover:translate-x-2 ease-in-out duration-500">
+            <h1 className="ml-6 px-3 py-2 justify-end rounded-md text-lg md:text-xl font-medium">
+              Bookshelf App 
             </h1>
+            <h1 className="px-3 py-2 rounded-md text-lg md:text-xl font-medium"><FaBook /></h1>
+            </div>
             <div className="hidden mx-auto my-auto sm:block">
               <div className="flex justify-end -mr-2 items-baseline">
                 <Link
