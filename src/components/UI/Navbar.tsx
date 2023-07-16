@@ -95,7 +95,7 @@ export default function Navbar() {
             Home
           </Link>
           <Link
-            to="/allBook"
+            to="/allBooks"
             className="text-white block px-3 py-2 rounded-md text-base font-medium"
           >
             All Books
