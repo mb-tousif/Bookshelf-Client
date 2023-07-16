@@ -1,7 +1,8 @@
-import toast, { Toaster } from 'react-hot-toast'
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+import toast, { Toaster } from "react-hot-toast";
 
-export default function Card() {
-    const notify = () =>
+export default function Card({ book }) {
+  const notify = () =>
     toast("Here is your toast.", {
       icon: "👏",
       style: {
@@ -10,26 +11,20 @@ export default function Card() {
       },
     });
   return (
-    
-    <div className="flex items-center justify-between ">
-    <p className="text-white">{/* {book.publicationYear} */}</p>
-    <button
-      type="button"
-      onClick={notify}
-      className="w-10 h-10 text-base font-medium text-white bg-[#344c4d] rounded-full hover:bg-pink-700"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
-        className="mx-auto"
-        fill="white"
-        viewBox="0 0 1792 1792"
-      >
-        <path d="M1600 736v192q0 40-28 68t-68 28h-416v416q0 40-28 68t-68 28h-192q-40 0-68-28t-28-68v-416h-416q-40 0-68-28t-28-68v-192q0-40 28-68t68-28h416v-416q0-40 28-68t68-28h192q40 0 68 28t28 68v416h416q40 0 68 28t28 68z"></path>
-      </svg>
-    </button>
-    <Toaster position="top-right" />
-  </div>
-  )
+    <div className="p-2 m-2 hover:translate-x-4 ease-in-out duration-500 bg-white shadow-lg rounded-2xl">
+      <img
+        src={book.imgUrl}
+        alt="Book"
+        className="w-full hover:scale-110 ease-in-out duration-500 p-4 m-auto h-36"
+      />
+      <div className="p-4 text-xs text-center mx-auto my-auto h-32 bg-[#28979f] rounded-lg">
+        <p className="md:text-xl font-bold mt-4 text-white ">{book.title}</p>
+        <p className="text-gray-50">{book.genre}</p>
+      </div>
+      <div className="mx-auto">
+        <p className="text-white">{book.publicationYear}</p>
+        <Toaster position="top-right" />
+      </div>
+    </div>
+  );
 }

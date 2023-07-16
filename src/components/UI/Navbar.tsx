@@ -48,7 +48,7 @@ export default function Navbar() {
                   className="flex text-white mx-auto my-auto justify-end rounded-md text-base md:text-lg font-medium"
                 >
                   <FaShoppingCart className="w-7 py-0.5 h-7" />
-                  <span className="px-1.5 ml-1.5 text-center align-baseline font-bold bg-red-600 text-white rounded">
+                  <span className="px-1.5 ml-1.5 text-center align-baseline font-bold bg-[#5811b4] text-white rounded">
                     {2}
                   </span>
                 </Link>
@@ -111,7 +111,7 @@ export default function Navbar() {
             className="flex text-white px-3 py-2 text-base font-medium"
           >
             <FaShoppingCart className="w-7 h-7" />
-            <span className="px-1.5 ml-1 text-center font-bold bg-yellow-400 rounded">
+            <span className="px-1.5 ml-1 text-center font-bold bg-[#5811b4] rounded">
               {2}
             </span>
           </Link>

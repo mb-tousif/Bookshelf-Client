@@ -12,7 +12,7 @@ export default function Home() {
     return <Loader />
   }
   return (
-    <div className='min-h-70vh grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4'>
+    <div className='min-h-70vh bg-gradient-to-b from-[#c1dfc4] to-[#ADCDED] grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4'>
       {
         data?.data?.map((book: TBook) => (
           <CardHome key={book._id} book={book} />
