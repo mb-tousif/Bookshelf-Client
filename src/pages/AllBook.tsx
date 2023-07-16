@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { TBook } from "../@types/AllTypes";
 import { useGetTenBooksQuery } from "../Redux/features/book/bookApiEndpoints";
 import Card from "../components/All-Books/Card";
 import FilterSection from "../components/All-Books/FilterSection";
-import CardHome from "../components/UI/CardHome";
 import Loader from "../components/UI/Loader";
 
 export default function AllBook() {
