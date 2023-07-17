@@ -4,13 +4,12 @@ export type TBook = {
     author: string;
     genre: string;
     publicationYear: number;
-    savedBy: string;
-    reviews: TReview [];
+    savedBy?: string;
+    reviews?: TReview[];
     imgUrl?: string;
     description?: string;
   };
 
-  export type TReview= {
-    user: string;
+  export type TReview = {
     comment: string;
-  }
+  };

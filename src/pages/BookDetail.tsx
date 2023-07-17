@@ -3,16 +3,15 @@ import { useState } from "react";
 import { useSingleBookQuery } from "../Redux/features/book/bookApiEndpoints";
 import Loader from "../components/UI/Loader";
 import Modal from "../components/Book-Detail/Modal";
+import { TReview } from "../@types/AllTypes";
 
 export default function BookDetail() {
   const [modal, setModal] = useState(false);
   const { id } = useParams<{ id: string }>();
   const { data, isLoading } = useSingleBookQuery(id); 
-  // console.log(data);
   if (isLoading === true) {
     return <Loader />;
   }
-  
   const toggleModal = (e) => {
     setModal(!modal);
   };
@@ -44,8 +43,8 @@ export default function BookDetail() {
             <p className="font-bold text-gray-700 text-[22px] leading-7 mb-1">
               {data?.data?.publicationYear}
             </p>
-            {data?.data?.reviews.map((review) => ( <p key={review._id} className="text-[#7C7C80] font-[15px] mt-2 mb-4"> {review.comment}
-            </p>))}
+            {data?.data?.reviews.map((review:TReview)=><p key={review.index} className="text-[#7C7C80] font-[15px] mt-2 mb-4"> {review.comment}
+            </p>)}
             <Link to={`/editBook/${id}`}>
             <button className="h-10 mb-3 w-full px-5 text-indigo-100 bg-indigo-700 rounded-lg transition-colors duration-150 focus:shadow-outline hover:bg-indigo-800" >Edit Book</button>
             </Link>
