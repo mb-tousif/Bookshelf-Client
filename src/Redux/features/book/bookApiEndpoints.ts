@@ -26,6 +26,7 @@ const bookApi = api.injectEndpoints({
           "Content-type": "application/json",
         },
       }),
+      providesTags: ["book"],
     }),
     createBook: builder.mutation({
       query: (data) => ({
@@ -34,6 +35,17 @@ const bookApi = api.injectEndpoints({
           "Content-type": "application/json",
         },
         method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["book"],
+    }),
+    updateBook: builder.mutation({
+      query: ( data) => ({
+        url: `/books/update/${data.id}`,
+        headers: {
+          "Content-type": "application/json",
+        },
+        method: "PATCH",
         body: data,
       }),
       invalidatesTags: ["book"],
@@ -57,4 +69,5 @@ export const {
   useSingleBookQuery,
   useCreateBookMutation,
   useDeleteBookMutation,
+  useUpdateBookMutation,
 } = bookApi;

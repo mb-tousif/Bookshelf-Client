@@ -24,9 +24,8 @@ export default function BookDetail() {
         <div className="max-w-md mx-auto">
           <div className="h-[236px]"
             style={{
-              backgroundImage:
-                "url(https://img.freepik.com/free-photo/pasta-spaghetti-with-shrimps-sauce_1220-5072.jpg?w=2000&t=st=1678041911~exp=1678042511~hmac=e4aa55e70f8c231d4d23832a611004f86eeb3b6ca067b3fa0c374ac78fe7aba6)",
-              backgroundSize: "cover",
+              backgroundImage:`url(${data?.data?.imgUrl})`,
+              backgroundSize: "fill",
               backgroundPosition: "center",
             }}
           ></div>
