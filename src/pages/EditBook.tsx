@@ -1,5 +1,4 @@
 import { Toaster } from "react-hot-toast";
-import toast from "react-hot-toast/headless";
 import { TBook } from "../@types/AllTypes";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
@@ -10,14 +9,6 @@ export default function EditBook() {
   const { id } = useParams<{ id: string }>();
   const { data, isLoading } = useSingleBookQuery(id);
   const [updateBook, res] = useUpdateBookMutation();
-  const notify = () =>
-  toast("Book is Edited!", {
-    icon: "👏",
-    style: {
-      background: "#344c4d",
-      color: "#fff",
-    },
-  });
   const {
     register,
     formState: { errors },
@@ -34,14 +25,13 @@ export default function EditBook() {
         comment: data.reviews,
       },
     })
-    notify();
   };
   console.log(res);
   if (isLoading || res.isLoading) {
     return <Loader />;
   }
   if(res.isSuccess === true){
-    return <Toaster />
+    return alert("Book is Edited! 👏 👏 👏")
   }
   
   return (

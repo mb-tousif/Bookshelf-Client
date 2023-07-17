@@ -1,9 +1,10 @@
 import { useDeleteBookMutation } from "../../Redux/features/book/bookApiEndpoints";
 import Loader from "../UI/Loader";
-
+import { useNavigate } from "react-router-dom";
 
 export default function Modal({ setModal, id }) {
   const [deleteBookMutation, { isLoading }]  = useDeleteBookMutation();
+  const navigate = useNavigate();
   const handleCancel = () => {
     setModal(false);
   };
@@ -12,9 +13,10 @@ export default function Modal({ setModal, id }) {
   const handleOk =async (id) => {
     try {
       await deleteBookMutation(id);
-      console.log("Book deleted successfully");
+      alert('Book deleted successfully!');
+      navigate("/");
     } catch (error) {
-      console.error("Failed to delete book:", error);
+      alert("Failed to delete book:");
     }
     setModal(false);
   };
