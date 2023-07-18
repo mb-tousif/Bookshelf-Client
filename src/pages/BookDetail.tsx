@@ -12,11 +12,13 @@ export default function BookDetail() {
   if (isLoading === true) {
     return <Loader />;
   }
-  const toggleModal = (e) => {
+  console.log(data);
+  
+  const toggleModal = () => {
     setModal(!modal);
   };
   if (modal===true) {
-    return <Modal setModal={setModal} id={id} />;
+    return <Modal setModal={setModal} id={id as string} />;
   }
   return (
     <div className="bg-gradient-to-b from-[#c1dfc4] to-[#ADCDED] min-h-70vh">
@@ -48,7 +50,7 @@ export default function BookDetail() {
             <button className="h-10 mb-3 w-full px-5 text-indigo-100 bg-indigo-700 rounded-lg transition-colors duration-150 focus:shadow-outline hover:bg-indigo-800" >Edit Book</button>
             </Link>
             <button
-              onClick={(e)=>toggleModal(e)}
+              onClick={()=>toggleModal()}
             className="h-10 w-full px-5 text-indigo-100 bg-indigo-700 rounded-lg transition-colors duration-150 focus:shadow-outline hover:bg-red-600" >Delete Book</button>
           </div>
         </div>

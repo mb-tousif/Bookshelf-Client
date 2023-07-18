@@ -3,20 +3,22 @@ import Loader from "../UI/Loader";
 import { useNavigate } from "react-router-dom";
 
 export default function Modal({ setModal, id }) {
-  const [deleteBookMutation, { isLoading }]  = useDeleteBookMutation();
+  const [deleteBookMutation, { isLoading,isSuccess }]  = useDeleteBookMutation();
   const navigate = useNavigate();
   const handleCancel = () => {
     setModal(false);
   };
   if(isLoading === true) return <Loader />
 
-  const handleOk =async (id) => {
+  const handleOk =async (id: string) => {
     try {
       await deleteBookMutation(id);
-      alert('Book deleted successfully!');
-      navigate("/");
+      if(isSuccess === true){
+        alert('Book deleted successfully!');
+        navigate("/");
+      }
     } catch (error) {
-      alert("Failed to delete book:");
+      alert(`Error: ${error}`);
     }
     setModal(false);
   };

@@ -11,10 +11,14 @@ const bookApi = api.injectEndpoints({
       providesTags: ["book"],
     }),
     getAllBooks: builder.query({
-      query: () => ({
-        url: "/books/get-all-books",
+      query: ({searchText,filterOptions}) => ({
+        url: "/books/get-all-books/?",
         headers: {
           "Content-type": "application/json; charset=UTF-8",
+        },
+        params: {
+          search: searchText,
+          filters: filterOptions,
         },
       }),
       providesTags: ["book"],

@@ -4,28 +4,39 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import {useState} from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { MdOutlineVisibilityOff, MdOutlineVisibility } from "react-icons/md";
-
-type FormValues = {
-  email: string;
-  password: string;
-};
-interface CreateLogin {
-  email: string;
-  password: string;
-}
+import { useLoginUserMutation } from "../Redux/features/user/userApiEndpoints";
+import Loader from "../components/UI/Loader";
+import { TLogin } from "../@types/AllTypes";
+import { setCredentials } from "../Redux/features/user/userSlice";
+import { useAppDispatch } from "../Redux/RTKHoooks";
 
 export default function Login() {
-  const { register, formState: { errors }, handleSubmit } = useForm<FormValues>();
+  const { register, formState: { errors }, handleSubmit } = useForm<TLogin>();
   const [showPassword, setShowPassword] = useState(true);
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
-    const checkUser:CreateLogin ={
-      email: data.email,
-      password: data.password
-    }
-    console.log(checkUser);
-    
+  const [ loginUser, { isError, isSuccess, isLoading, data }] = useLoginUserMutation();
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from || "/allBooks";
+  const onSubmit: SubmitHandler<TLogin> = (data) => {
+    loginUser(data);
+  }
+  if (isLoading === true) {
+    return <Loader />;
+  }
+  const payload = data?.data?.accessToken as string;
+  // console.log(payload);
+  
+  if (isSuccess) {
+    dispatch(setCredentials(payload));
+    localStorage.setItem("token", payload);
+    return navigate(from, { replace: true });
+  }
+
+  if (isError) {
+    return navigate("/login");
   }
   return (
     <div className="bg-gradient-to-b from-[#c1dfc4] to-[#ADCDED] pt-8 pb-8 flex justify-center">
@@ -63,20 +74,12 @@ export default function Login() {
             <input
               type="password"
               {...register("password", {
-                required: { value: true, message: "Password is required!" },
-                pattern: {
-                  value:
-                    /^(?=.*[a-z]{3,})(?=.*[A-Z])(?=.*\d)(?=.*[^\w\d])(.{6,})$/,
-                  message: "Enter strong password with minLength six,minNumbers one,minUppercase one, minSymbols one. ",
-                },
+                required: { value: true, message: "Password is required!" }
               })}
               className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gradient-to-b from-[#c1dfc4] to-[#ADCDED] bg-clip-padding border-none rounded transition ease-in-out m-0 placeholder-teal-900"
               placeholder="Password"
             />
             {errors.password?.type === "required" && (
-              <span className="text-red-600">{errors.password.message}</span>
-            )}
-            {errors.password?.type === "pattern" && (
               <span className="text-red-600">{errors.password.message}</span>
             )}
             <MdOutlineVisibilityOff
@@ -90,19 +93,11 @@ export default function Login() {
               type="text"
               {...register("password", {
                 required: { value: true, message: "Password is required!" },
-                pattern: {
-                  value:
-                    /^(?=.*[a-z]{3,})(?=.*[A-Z])(?=.*\d)(?=.*[^\w\d])(.{6,})$/,
-                  message: "Enter strong password with minLength six,minNumbers one,minUppercase one, minSymbols one. ",
-                },
               })}
               className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gradient-to-b from-[#c1dfc4] to-[#ADCDED] bg-clip-padding border-none rounded transition ease-in-out m-0 placeholder-teal-900"
               placeholder="Password"
             />
             {errors.password?.type === "required" && (
-              <span className="text-red-600">{errors.password.message}</span>
-            )}
-            {errors.password?.type === "pattern" && (
               <span className="text-red-600">{errors.password.message}</span>
             )}
             <MdOutlineVisibility

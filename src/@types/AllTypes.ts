@@ -22,3 +22,7 @@ export type TLogin = {
 export type TRegister = {
   address: string;
 } & TLogin;
+
+export type TAuth = {
+  token: string | null;
+};

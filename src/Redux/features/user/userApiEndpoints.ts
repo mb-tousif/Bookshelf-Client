@@ -9,7 +9,6 @@ const userApi = api.injectEndpoints({
                     "Content-type": "application/json; charset=UTF-8",
                 },
             }),
-            providesTags: ["user"],
         }),
         registerUser: builder.mutation({
             query: (data) => ({
@@ -20,7 +19,6 @@ const userApi = api.injectEndpoints({
                 method: "POST",
                 body: data,
             }),
-            invalidatesTags: ["user"],
         }),
         loginUser: builder.mutation({
             query: (data) => ({
@@ -31,7 +29,6 @@ const userApi = api.injectEndpoints({
                 method: "POST",
                 body: data,
             }),
-            invalidatesTags: ["user"],
         }),
         updateUser: builder.mutation({
             query: (data) => ({
@@ -42,7 +39,6 @@ const userApi = api.injectEndpoints({
                 method: "PATCH",
                 body: data,
             }),
-            invalidatesTags: ["user"],
         }),
     })
 })

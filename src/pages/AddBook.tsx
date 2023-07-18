@@ -18,7 +18,6 @@ export default function AddBook() {
   } = useForm<TBook>();
 
   const onSubmit: SubmitHandler<TBook> = (data: TBook) => {
-    console.log(data);
     createBook({
       title: data.title,
       author: data.author,
@@ -35,7 +34,18 @@ export default function AddBook() {
   }
 
   if (res.isError) {
-    return <ToastBar message="Error" />;
+    return <ToastBar toast={
+      {
+        title: "Error",
+        description: "Something went wrong",
+        icon: "⚠️",
+        style: {
+          border: "1px solid #713200",
+          padding: "16px",
+          color: "#713200",
+        },
+      }
+    } />;
   }
 
   return (
