@@ -4,27 +4,32 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { MdOutlineVisibilityOff, MdOutlineVisibility } from "react-icons/md";
-
-type FormValues = {
-  address: string;
-  email: string;
-  password: string;
-};
+import { useRegisterUserMutation } from "../Redux/features/user/userApiEndpoints";
+import Loader from "../components/UI/Loader";
+import { TRegister } from "../@types/AllTypes";
 
 export default function Register() {
+  const [ registerUser, { isLoading, isSuccess }] = useRegisterUserMutation();
+  const navigate = useNavigate();
   const {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm<FormValues>();
+  } = useForm<TRegister>();
   const [showPassword, setShowPassword] = useState(true);
-  const [loader, setLoader] = useState(false);
-
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
+  const onSubmit: SubmitHandler<TRegister> = (data) => {
+    registerUser(data);
     console.log(data);
   };
+  if (isLoading === true) {
+    return <Loader />;
+  }
+  if (isSuccess) {
+    return navigate("/login");
+  }
+
   return (
     <div className="bg-gradient-to-b from-[#c1dfc4] to-[#ADCDED] pt-8 pb-8 flex justify-center">
       <div className="block p-6 rounded-lg shadow-lg sm:w-3/5 bg-white max-w-sm">
@@ -62,20 +67,11 @@ export default function Register() {
                 type="password"
                 {...register("password", {
                   required: { value: true, message: "Password is required!" },
-                  pattern: {
-                    value:
-                      /^(?=.*[a-z]{3,})(?=.*[A-Z])(?=.*\d)(?=.*[^\w\d])(.{6,})$/,
-                    message:
-                      "Enter strong password with minLength six,minNumbers one,minUppercase one, minSymbols one. ",
-                  },
                 })}
                 className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gradient-to-b from-[#c1dfc4] to-[#ADCDED] bg-clip-padding border-none rounded transition ease-in-out m-0 placeholder-teal-900"
                 placeholder="Password"
               />
               {errors.password?.type === "required" && (
-                <span className="text-red-600">{errors.password.message}</span>
-              )}
-              {errors.password?.type === "pattern" && (
                 <span className="text-red-600">{errors.password.message}</span>
               )}
               <MdOutlineVisibilityOff
@@ -89,21 +85,12 @@ export default function Register() {
               <input
                 type="text"
                 {...register("password", {
-                  required: { value: true, message: "Password is required!" },
-                  pattern: {
-                    value:
-                      /^(?=.*[a-z]{3,})(?=.*[A-Z])(?=.*\d)(?=.*[^\w\d])(.{6,})$/,
-                    message:
-                      "Enter strong password with minLength six,minNumbers one,minUppercase one, minSymbols one. ",
-                  },
+                  required: { value: true, message: "Password is required!" }
                 })}
                 className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gradient-to-b from-[#c1dfc4] to-[#ADCDED] bg-clip-padding border-none rounded transition ease-in-out m-0 placeholder-teal-900"
                 placeholder="Password"
               />
               {errors.password?.type === "required" && (
-                <span className="text-red-600">{errors.password.message}</span>
-              )}
-              {errors.password?.type === "pattern" && (
                 <span className="text-red-600">{errors.password.message}</span>
               )}
               <MdOutlineVisibility
@@ -142,6 +129,7 @@ export default function Register() {
           >
             Sign up 🥤
           </button>
+          {/* <Toaster /> */}
         </form>
         <div className="h-0.5 mb-2 mt-6 bg-slate-600"></div>
         <div className="mb-2 text-center text-lg">

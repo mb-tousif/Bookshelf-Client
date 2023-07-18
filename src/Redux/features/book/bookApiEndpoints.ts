@@ -14,7 +14,7 @@ const bookApi = api.injectEndpoints({
       query: () => ({
         url: "/books/get-all-books",
         headers: {
-          "Content-type": "application/json",
+          "Content-type": "application/json; charset=UTF-8",
         },
       }),
       providesTags: ["book"],
@@ -32,7 +32,7 @@ const bookApi = api.injectEndpoints({
       query: (data) => ({
         url: `/books/create-book`,
         headers: {
-          "Content-type": "application/json",
+          "Content-type": "application/json; charset=UTF-8",
         },
         method: "POST",
         body: data,
@@ -43,7 +43,7 @@ const bookApi = api.injectEndpoints({
       query: ( data) => ({
         url: `/books/update/${data.id}`,
         headers: {
-          "Content-type": "application/json",
+          "Content-type": "application/json; charset=UTF-8",
         },
         method: "PATCH",
         body: data,
@@ -54,7 +54,7 @@ const bookApi = api.injectEndpoints({
       query: (id) => ({
         url: `/books/delete/${id}`,
         headers: {
-          "Content-type": "application/json",
+          "Content-type": "application/json; charset=UTF-8",
         },
         method: "DELETE",
       }),
