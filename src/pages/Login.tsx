@@ -7,6 +7,7 @@ import Loader from "../components/UI/Loader";
 import { TLogin } from "../@types/AllTypes";
 import { setCredentials } from "../Redux/features/user/userSlice";
 import { useAppDispatch } from "../Redux/hooks";
+import { toast } from "react-toastify";
 
 export default function Login(): JSX.Element  {
   const { register, formState: { errors }, handleSubmit } = useForm<TLogin>();
@@ -23,9 +24,10 @@ export default function Login(): JSX.Element  {
     return <Loader />;
   }
   const payload = data?.data as { accessToken: string};
-  console.log(payload);
+  // console.log(payload);
   
   if (isSuccess) {
+    toast.success("Login Successfully! 👏 👏 👏");
     dispatch(setCredentials(payload as { accessToken: string}));
     localStorage.setItem("token", payload.accessToken);
     navigate(from, { replace: true });

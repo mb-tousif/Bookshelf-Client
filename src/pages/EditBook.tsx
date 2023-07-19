@@ -1,9 +1,9 @@
-import { Toaster } from "react-hot-toast";
 import { TBook } from "../@types/AllTypes";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { useSingleBookQuery, useUpdateBookMutation } from "../Redux/features/book/bookApiEndpoints";
 import Loader from "../components/UI/Loader";
+import { toast } from "react-toastify";
 
 export default function EditBook(): JSX.Element  {
   const { id } = useParams<{ id: string }>();
@@ -31,7 +31,7 @@ export default function EditBook(): JSX.Element  {
     return <Loader />;
   }
   if(res.isSuccess === true){
-    alert("Book is Edited! 👏 👏 👏")
+   toast.success("Book Successfully Edited! 👏 👏 👏");
   }
   
   return (
@@ -146,7 +146,6 @@ export default function EditBook(): JSX.Element  {
             className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gradient-to-b from-[#c1dfc4] to-[#ADCDED] rounded transition ease-in-out m-0 placeholder-teal-900"
           >
             Submit
-            <Toaster />
           </button>
         </form>
       </div>

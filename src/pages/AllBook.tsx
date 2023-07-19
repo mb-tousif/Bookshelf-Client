@@ -1,8 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import { useState } from "react";
-import { TBook } from "../@types/AllTypes";
+import { SetStateAction, useState } from "react";
+import { TBook, TFilterData } from "../@types/AllTypes";
 import { useGetAllBooksQuery } from "../Redux/features/book/bookApiEndpoints";
 import Card from "../components/All-Books/Card";
 import Loader from "../components/UI/Loader";
@@ -11,10 +8,21 @@ import { Link } from "react-router-dom";
 export default function AllBook() {
   const [searchText, setSearchText] = useState<string>("")
   const [filterOptions, setFilterOptions] = useState<string>('');
-  const { data, isLoading } = useGetAllBooksQuery({searchText, filterOptions}, { refetchOnMountOrArgChange: true })
+  const filterQuery : TFilterData = {
+    genre: filterOptions,
+    publicationYear: Number(filterOptions)
+  } 
+  const { data, isLoading } = useGetAllBooksQuery({searchText, filterQuery}, { refetchOnMountOrArgChange: true })
   if (isLoading === true) {
     return <Loader />
   }
+  const handleGenre = (e: { target: { value: SetStateAction<string>; }; }) => {
+    filterQuery.genre= setFilterOptions(e.target.value) as any
+  }
+  const handleYear = (e: { target: { value: SetStateAction<string>; }; }) => {
+    filterQuery.publicationYear= setFilterOptions(e.target.value) as any
+  }
+  console.log(filterQuery);
   
   return (
     <div className="bg-gradient-to-b text-gray-50 from-[#c1dfc4] to-[#ADCDED] min-h-70vh ">
@@ -32,7 +40,7 @@ export default function AllBook() {
       <select
         className="h-8 w-full m-2 border-none text-xl text-center bg-[#1f5f54cc] rounded-xl"
         value={filterOptions}
-        onChange={(e) => setFilterOptions(e.target.value)}
+        onChange={(e) => handleGenre(e)}
       >
         <option value="">Genre</option>
         <option value="Programming Book">Programming Book</option>
@@ -45,7 +53,7 @@ export default function AllBook() {
       <select
         className="h-8 w-full m-2 border-none text-xl text-center bg-[#1f5f54cc] rounded-xl"
         value={filterOptions}
-        onChange={(e) => setFilterOptions(e.target.value)}
+        onChange={(e) => handleYear(e)}
       >
         <option value="">Published Years</option>
         <option value="2020">2020</option>

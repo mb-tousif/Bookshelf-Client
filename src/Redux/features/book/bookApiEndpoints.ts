@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/restrict-template-expressions */
+import { TFilterData } from "../../../@types/AllTypes";
 import { api } from "../../api/apiSlices";
 
 const bookApi = api.injectEndpoints({
@@ -12,13 +11,13 @@ const bookApi = api.injectEndpoints({
     }),
     getAllBooks: builder.query({
       query: ({searchText,filterOptions}) => ({
-        url: "/books/get-all-books/?",
+        url: "/books/get-all-books",
         headers: {
           "Content-type": "application/json; charset=UTF-8",
         },
         params: {
-          search: searchText,
-          filters: filterOptions,
+          searchTerm: searchText as string,
+          filterOptions: filterOptions as TFilterData,
         },
       }),
       providesTags: ["book"],

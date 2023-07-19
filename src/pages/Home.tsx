@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { TBook } from "../@types/AllTypes";
 import { useGetTenBooksQuery } from "../Redux/features/book/bookApiEndpoints";
 import CardHome from "../components/UI/CardHome";

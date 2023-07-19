@@ -27,3 +27,8 @@ export type TRegister = {
 export type TAuth = {
   accessToken: string | null;
 };
+
+export type TFilterData = {
+  genre?: string;
+  publicationYear?: number;
+};

@@ -1,12 +1,8 @@
-/* eslint-disable @typescript-eslint/no-misused-promises */
-/* eslint-disable @typescript-eslint/no-floating-promises */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-// import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { TBook } from "../@types/AllTypes";
 import { useCreateBookMutation } from "../Redux/features/book/bookApiEndpoints";
 import Loader from "../components/UI/Loader";
+import { toast } from "react-toastify";
 
 export default function AddBook() {
   const [createBook, res] = useCreateBookMutation();
@@ -27,11 +23,12 @@ export default function AddBook() {
       },
     });
   };
-  console.log(res);
   if (res.isLoading) {
     return <Loader />;
-  }
-
+  };
+  if (res.isSuccess) {
+    return toast.success("Book Added Successfully 🌒");
+  };
   if (res.isError) {
     return (
       <h1 className="text-2xl text-red-600 text-center p-6">Oops! There is an Error </h1>
@@ -111,6 +108,14 @@ export default function AddBook() {
                 required: {
                   value: true,
                   message: "Publish year is required",
+                },
+                minLength: {
+                  value: 4,
+                  message: "Year must be 4 digits",
+                },
+                maxLength: {
+                  value: 4,
+                  message: "Year must be 4 digits",
                 },
               })}
               className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gradient-to-b from-[#c1dfc4] to-[#ADCDED] bg-clip-padding border-none rounded transition ease-in-out m-0 placeholder-teal-900"

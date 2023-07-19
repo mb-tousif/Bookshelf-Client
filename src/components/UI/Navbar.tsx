@@ -6,6 +6,7 @@ import { FaShoppingCart } from "react-icons/fa";
 import { FaBook } from "react-icons/fa6";
 import { useAppDispatch, useAppSelector } from "../../Redux/hooks";
 import { logout } from "../../Redux/features/user/userSlice";
+import { toast } from "react-toastify";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -13,6 +14,7 @@ export default function Navbar() {
   const dispatch = useAppDispatch();
   const handleSignOut = () => {
     dispatch(logout());
+    toast.success("Logout Successfully! 👏 👏 👏");
   };
 
   return (

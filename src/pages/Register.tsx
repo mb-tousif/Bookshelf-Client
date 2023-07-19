@@ -5,9 +5,10 @@ import { MdOutlineVisibilityOff, MdOutlineVisibility } from "react-icons/md";
 import { useRegisterUserMutation } from "../Redux/features/user/userApiEndpoints";
 import Loader from "../components/UI/Loader";
 import { TRegister } from "../@types/AllTypes";
+import { toast } from "react-toastify";
 
 export default function Register(): JSX.Element  {
-  const [ registerUser, { isLoading, isSuccess }] = useRegisterUserMutation();
+  const [ registerUser, { isLoading, isSuccess, isError }] = useRegisterUserMutation();
   const navigate = useNavigate();
   const {
     register,
@@ -23,7 +24,12 @@ export default function Register(): JSX.Element  {
     return <Loader />;
   }
   if (isSuccess) {
+    toast.success("Register Successfully! 👏 👏 👏");
     navigate("/login");
+  }
+  if (isError) {
+    navigate("/register");
+    toast.error("Oops! There is an Error 🥺");
   }
 
   return (
