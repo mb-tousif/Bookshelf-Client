@@ -4,12 +4,15 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { AiOutlineClose } from "react-icons/ai";
 import { FaShoppingCart } from "react-icons/fa";
 import { FaBook } from "react-icons/fa6";
+import { useAppDispatch, useAppSelector } from "../../Redux/hooks";
+import { logout } from "../../Redux/features/user/userSlice";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-  const [token, setToken] = useState(false);
+  const { accessToken } = useAppSelector((state) => state.auth);
+  const dispatch = useAppDispatch();
   const handleSignOut = () => {
-    setToken(!token);
+    dispatch(logout());
   };
 
   return (
@@ -52,7 +55,7 @@ export default function Navbar() {
                     {2}
                   </span>
                 </Link>
-                {!token ? (
+                {accessToken ? (
                   <Link
                     to="/"
                     className="text-white px-3 py-2 justify-end rounded-md text-base md:text-lg font-medium"
@@ -115,7 +118,7 @@ export default function Navbar() {
               {2}
             </span>
           </Link>
-          {!token ? (
+          {accessToken ? (
             <Link
               to="/"
               className="text-white px-3 py-2 justify-end rounded-md text-base md:text-lg font-medium"

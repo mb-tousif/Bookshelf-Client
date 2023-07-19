@@ -6,7 +6,7 @@ import Modal from "../components/Book-Detail/Modal";
 import { TReview } from "../@types/AllTypes";
 
 export default function BookDetail() {
-  const [modal, setModal] = useState(false);
+  const [modal, setModal] = useState<boolean>(false);
   const { id } = useParams<{ id: string }>();
   const { data, isLoading } = useSingleBookQuery(id); 
   if (isLoading === true) {

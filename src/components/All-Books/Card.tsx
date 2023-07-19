@@ -3,8 +3,9 @@
 // import toast, { Toaster } from "react-hot-toast";
 
 import { Link } from "react-router-dom";
+import { TBook } from "../../@types/AllTypes";
 
-export default function Card( {book} ) {
+export default function Card( {book} : {book:TBook}) {
 
   return (
     <Link to={`/bookDetail/${book._id}`}>

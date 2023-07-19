@@ -7,7 +7,6 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { TBook } from "../@types/AllTypes";
 import { useCreateBookMutation } from "../Redux/features/book/bookApiEndpoints";
 import Loader from "../components/UI/Loader";
-import { ToastBar } from "react-hot-toast";
 
 export default function AddBook() {
   const [createBook, res] = useCreateBookMutation();
@@ -34,18 +33,9 @@ export default function AddBook() {
   }
 
   if (res.isError) {
-    return <ToastBar toast={
-      {
-        title: "Error",
-        description: "Something went wrong",
-        icon: "⚠️",
-        style: {
-          border: "1px solid #713200",
-          padding: "16px",
-          color: "#713200",
-        },
-      }
-    } />;
+    return (
+      <h1 className="text-2xl text-red-600 text-center p-6">Oops! There is an Error </h1>
+    );
   }
 
   return (

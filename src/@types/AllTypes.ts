@@ -1,4 +1,4 @@
-export type TBook = {
+export interface TBook {
   _id: string;
   title: string;
   author: string;
@@ -11,6 +11,7 @@ export type TBook = {
 };
 
 export type TReview = {
+  index: null | undefined;
   comment: string;
 };
 
@@ -24,5 +25,5 @@ export type TRegister = {
 } & TLogin;
 
 export type TAuth = {
-  token: string | null;
+  accessToken: string | null;
 };

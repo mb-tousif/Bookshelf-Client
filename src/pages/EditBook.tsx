@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { useSingleBookQuery, useUpdateBookMutation } from "../Redux/features/book/bookApiEndpoints";
 import Loader from "../components/UI/Loader";
 
-export default function EditBook() {
+export default function EditBook(): JSX.Element  {
   const { id } = useParams<{ id: string }>();
   const { data, isLoading } = useSingleBookQuery(id);
   const [updateBook, res] = useUpdateBookMutation();
@@ -31,7 +31,7 @@ export default function EditBook() {
     return <Loader />;
   }
   if(res.isSuccess === true){
-    return alert("Book is Edited! 👏 👏 👏")
+    alert("Book is Edited! 👏 👏 👏")
   }
   
   return (

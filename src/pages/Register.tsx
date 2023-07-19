@@ -1,7 +1,3 @@
-/* eslint-disable @typescript-eslint/no-misused-promises */
-/* eslint-disable @typescript-eslint/no-floating-promises */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
@@ -10,7 +6,7 @@ import { useRegisterUserMutation } from "../Redux/features/user/userApiEndpoints
 import Loader from "../components/UI/Loader";
 import { TRegister } from "../@types/AllTypes";
 
-export default function Register() {
+export default function Register(): JSX.Element  {
   const [ registerUser, { isLoading, isSuccess }] = useRegisterUserMutation();
   const navigate = useNavigate();
   const {
@@ -27,7 +23,7 @@ export default function Register() {
     return <Loader />;
   }
   if (isSuccess) {
-    return navigate("/login");
+    navigate("/login");
   }
 
   return (

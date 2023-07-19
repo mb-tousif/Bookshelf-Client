@@ -16,7 +16,6 @@ export default function AllBook() {
     return <Loader />
   }
   
-
   return (
     <div className="bg-gradient-to-b text-gray-50 from-[#c1dfc4] to-[#ADCDED] min-h-70vh ">
       <div className="pt-4 flex justify-center">

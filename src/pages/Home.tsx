@@ -11,6 +11,7 @@ export default function Home() {
   if (isLoading === true) {
     return <Loader />
   }
+  console.log(data);
   return (
     <div className='min-h-70vh bg-gradient-to-b from-[#c1dfc4] to-[#ADCDED] grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4'>
       {

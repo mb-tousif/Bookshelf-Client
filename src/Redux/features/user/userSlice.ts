@@ -1,21 +1,21 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { TAuth } from "../../../@types/AllTypes";
 
 
 const initialState:TAuth = {
-    token: localStorage.getItem('token')|| null,
+    accessToken: localStorage.getItem('token')|| null,
 }
 
 export const userSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        setCredentials: (state, action) => {
-            state.token = action.payload as string;
-            localStorage.setItem("token", state.token);
+        setCredentials: (state, action:PayloadAction<{ accessToken: string}>) => {
+            state.accessToken = action.payload.accessToken;
+            localStorage.setItem("token", state.accessToken);
         },
         logout: (state) => {
-            state.token = null;
+            state.accessToken = null;
             localStorage.removeItem("token");
         }
     }

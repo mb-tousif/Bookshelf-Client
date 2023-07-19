@@ -1,15 +1,14 @@
 import { useDeleteBookMutation } from "../../Redux/features/book/bookApiEndpoints";
-import Loader from "../UI/Loader";
 import { useNavigate } from "react-router-dom";
+import Loader from "../UI/Loader";
 
-export default function Modal({ setModal, id }) {
+export default function Modal({ setModal, id }: { setModal: any; id: string }) {
   const [deleteBookMutation, { isLoading,isSuccess }]  = useDeleteBookMutation();
   const navigate = useNavigate();
   const handleCancel = () => {
-    setModal(false);
+    setModal(false) as boolean;
   };
   if(isLoading === true) return <Loader />
-
   const handleOk =async (id: string) => {
     try {
       await deleteBookMutation(id);

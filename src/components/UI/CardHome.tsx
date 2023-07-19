@@ -1,9 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-
 import { Link } from "react-router-dom";
-
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-export default function CardHome({ book }) {
+import { TBook } from "../../@types/AllTypes";
+export default function CardHome({ book }: { book:TBook}) {
   return (
     <div className="p-2 m-2 hover:translate-x-4 ease-in-out duration-500 bg-white shadow-lg rounded-2xl">
       <img src={book.imgUrl} alt="Book" className="w-full hover:scale-110 ease-in-out duration-500 p-2 m-auto h-40" />

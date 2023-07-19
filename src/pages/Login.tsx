@@ -1,7 +1,3 @@
-/* eslint-disable @typescript-eslint/no-misused-promises */
-/* eslint-disable @typescript-eslint/no-floating-promises */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import {useState} from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -10,9 +6,9 @@ import { useLoginUserMutation } from "../Redux/features/user/userApiEndpoints";
 import Loader from "../components/UI/Loader";
 import { TLogin } from "../@types/AllTypes";
 import { setCredentials } from "../Redux/features/user/userSlice";
-import { useAppDispatch } from "../Redux/RTKHoooks";
+import { useAppDispatch } from "../Redux/hooks";
 
-export default function Login() {
+export default function Login(): JSX.Element  {
   const { register, formState: { errors }, handleSubmit } = useForm<TLogin>();
   const [showPassword, setShowPassword] = useState(true);
   const [ loginUser, { isError, isSuccess, isLoading, data }] = useLoginUserMutation();
@@ -26,17 +22,17 @@ export default function Login() {
   if (isLoading === true) {
     return <Loader />;
   }
-  const payload = data?.data?.accessToken as string;
-  // console.log(payload);
+  const payload = data?.data as { accessToken: string};
+  console.log(payload);
   
   if (isSuccess) {
-    dispatch(setCredentials(payload));
-    localStorage.setItem("token", payload);
-    return navigate(from, { replace: true });
+    dispatch(setCredentials(payload as { accessToken: string}));
+    localStorage.setItem("token", payload.accessToken);
+    navigate(from, { replace: true });
   }
 
   if (isError) {
-    return navigate("/login");
+    navigate("/login");
   }
   return (
     <div className="bg-gradient-to-b from-[#c1dfc4] to-[#ADCDED] pt-8 pb-8 flex justify-center">
