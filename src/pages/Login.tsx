@@ -24,7 +24,6 @@ export default function Login(): JSX.Element  {
     return <Loader />;
   }
   const payload = data?.data as { accessToken: string};
-  // console.log(payload);
   
   if (isSuccess) {
     toast.success("Login Successfully! 👏 👏 👏");
@@ -34,6 +33,7 @@ export default function Login(): JSX.Element  {
   }
 
   if (isError) {
+    toast.error("Oops! There is an Error 🥺 with your login.");
     navigate("/login");
   }
   return (

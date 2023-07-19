@@ -1,6 +1,7 @@
 import { useDeleteBookMutation } from "../../Redux/features/book/bookApiEndpoints";
 import { useNavigate } from "react-router-dom";
 import Loader from "../UI/Loader";
+import { toast } from "react-toastify";
 
 export default function Modal({ setModal, id }: { setModal: any; id: string }) {
   const [deleteBookMutation, { isLoading,isSuccess }]  = useDeleteBookMutation();
@@ -13,11 +14,11 @@ export default function Modal({ setModal, id }: { setModal: any; id: string }) {
     try {
       await deleteBookMutation(id);
       if(isSuccess === true){
-        alert('Book deleted successfully!');
+        toast.success("Book Successfully Deleted! 👏 👏 👏")
         navigate("/");
       }
     } catch (error) {
-      alert(`Error: ${error}`);
+      toast.error(`Oops! There is an ${error} 😞`);
     }
     setModal(false);
   };

@@ -44,6 +44,9 @@ export default function BookDetail() {
             <p className="font-bold text-gray-700 text-[22px] leading-7 mb-1">
               {data?.data?.publicationYear}
             </p>
+            <button
+              onClick={()=>toggleModal()}
+            className="h-10 w-full px-5 text-indigo-100 bg-indigo-700 rounded-lg transition-colors duration-150 focus:shadow-outline hover:bg-green-600" >Add Book Review</button>
             {data?.data?.reviews.map((review:TReview)=><p key={review.index} className="text-[#7C7C80] font-[15px] mt-2 mb-4"> {review.comment}
             </p>)}
             <Link to={`/editBook/${id}`}>
