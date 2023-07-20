@@ -4,7 +4,7 @@ import Loader from "../UI/Loader";
 import { toast } from "react-toastify";
 
 export default function Modal({ setModal, id }: { setModal: any; id: string }) {
-  const [deleteBookMutation, { isLoading,isSuccess }]  = useDeleteBookMutation();
+  const [deleteBookMutation, { isLoading,isSuccess, isError }]  = useDeleteBookMutation();
   const navigate = useNavigate();
   const handleCancel = () => {
     setModal(false) as boolean;
@@ -22,6 +22,9 @@ export default function Modal({ setModal, id }: { setModal: any; id: string }) {
     }
     setModal(false);
   };
+
+  if( isError === true) return toast.error("Oops! You are not authorized to del 😞")
+
   return (
     <div className="flex bg-gradient-to-b from-[#c1dfc4] to-[#ADCDED] bg-opacity-50 min-h-70vh justify-center items-center top-0 right-0 bottom-0 left-0">
       <div className="bg-[#4b614d] px-16 py-14 rounded-md text-center">

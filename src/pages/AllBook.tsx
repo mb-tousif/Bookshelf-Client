@@ -14,8 +14,8 @@ export default function AllBook() {
     genre: genreOptions,
     publicationYear: yearOptions,
   };
-  const { searchTerm, genre, publicationYear} = filterQuery;
-  const { data, isLoading } = useGetAllBooksQuery({searchTerm, genre, publicationYear});
+  const { data, isLoading } = useGetAllBooksQuery({
+    searchTerm: searchText});
   if (isLoading === true) {
     return <Loader />;
   }

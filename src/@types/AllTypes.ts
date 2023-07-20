@@ -3,7 +3,7 @@ export interface TBook {
   title: string;
   author: string;
   genre: string;
-  publicationYear: number;
+  publicationYear: string;
   savedBy?: string;
   reviews?: TReview[];
   imgUrl?: string;

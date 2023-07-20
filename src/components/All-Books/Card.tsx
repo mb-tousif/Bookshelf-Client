@@ -1,7 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-// import toast, { Toaster } from "react-hot-toast";
-
 import { Link } from "react-router-dom";
 import { TBook } from "../../@types/AllTypes";
 
