@@ -11,7 +11,7 @@ export interface TBook {
 };
 
 export type TReview = {
-  index: null | undefined;
+  _id?: string;
   comment: string;
 };
 
