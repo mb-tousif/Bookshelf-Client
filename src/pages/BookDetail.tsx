@@ -20,7 +20,7 @@ export default function BookDetail() {
   };
   if (modal === true) {
     return <Modal setModal={setModal} id={id as string} />;
-  }
+  };
 
   const toggleReviewModal = () => {
     setReviewModal(!reviewModal);

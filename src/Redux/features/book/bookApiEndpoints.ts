@@ -1,4 +1,3 @@
-import { TFilterData } from "../../../@types/AllTypes";
 import { api } from "../../api/apiSlices";
 
 const bookApi = api.injectEndpoints({
@@ -10,14 +9,17 @@ const bookApi = api.injectEndpoints({
       providesTags: ["book"],
     }),
     getAllBooks: builder.query({
-      query: ({searchText,filterOptions}) => ({
-        url: "/books/get-all-books",
+      query: (query?:{
+        page?: number;
+        limit?: number;
+        sortOrder?: string;
+        searchTerm?: string;
+        genre?: string;
+        publicationYear?: string;
+      }) => ({
+        url: `/books/get-all-books?${query}`,
         headers: {
           "Content-type": "application/json; charset=UTF-8",
-        },
-        params: {
-          searchTerm: searchText as string,
-          filterOptions: filterOptions as TFilterData,
         },
       }),
       providesTags: ["book"],

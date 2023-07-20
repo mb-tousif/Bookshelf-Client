@@ -29,6 +29,7 @@ export type TAuth = {
 };
 
 export type TFilterData = {
+  searchTerm?: string;
   genre?: string;
-  publicationYear?: number;
+  publicationYear?: string;
 };
