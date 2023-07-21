@@ -14,8 +14,8 @@ export default function AllBook() {
     genre: genreOptions,
     publicationYear: yearOptions,
   };
-  const { data, isLoading } = useGetAllBooksQuery({
-    searchTerm: searchText});
+
+  const { data, isLoading } = useGetAllBooksQuery( filterQuery, { refetchOnMountOrArgChange: true});
   if (isLoading === true) {
     return <Loader />;
   }
@@ -25,7 +25,7 @@ export default function AllBook() {
   const handleYear = (e: { target: { value: SetStateAction<string> } }) => {
     setYearOptions(e.target.value);
   };
-  console.log(filterQuery);
+  // console.log(filterQuery);
   return (
     <div className="bg-gradient-to-b text-gray-50 from-[#c1dfc4] to-[#ADCDED] min-h-70vh ">
       <div className="pt-4 flex justify-center">
